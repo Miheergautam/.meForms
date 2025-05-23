@@ -1,0 +1,70 @@
+.summary-container {
+    max-width: 700px;
+    margin: auto;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .summary-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .summary-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+  
+  .summary-card {
+    background-color: #fafafa;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    text-align: left;
+  }
+  
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+  }
+  
+  .summary-label {
+    font-weight: 600;
+    color: #555;
+  }
+  
+  .summary-value {
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .summary-footer {
+    margin-top: 2.5rem;
+    font-size: 1rem;
+    color: #444;
+  }
+
+  .submit-button {
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  

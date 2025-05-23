@@ -1,0 +1,54 @@
+.intro-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .intro-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+  
+  .highlight {
+    color: #007bff;
+  }
+  
+  .intro-subtitle,
+  .intro-description {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .intro-duration {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+  
+  .start-button {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .start-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .intro-hint {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: #888;
+  }
+  

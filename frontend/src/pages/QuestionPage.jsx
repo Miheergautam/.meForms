@@ -1,43 +1,99 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "../context/FormContext";
 
+import "../styles/QuestionPage.css";
+
+
+import {
+  validateName,
+  validateEmail,
+  validatePhone,
+  validateCountry,
+  validatePAN,
+  validateAadhar
+} from "../utils/validation";
+
+
+
 const questions = [
-  { label: "name", question: "What is your name?" },
-  { label: "email", question: "What is your Email?" },
-  { label: "phone Number", question: "What is your phoneNumber?" },
-  { label: "country", question: "What is your country?" },
-  { label: "pan", question: "What is your PAN Number?" },
-  { label: "aadhar", question: "What is your Aadhar Number?" },
+  {
+    name: "name",
+    label: "Hey friend! What's your full name?",
+    description: "We need something to call you — preferably the real you, not your alter ego 👀",
+  },
+  {
+    name: "email",
+    label: "What's your magical email address?",
+    description: "We'll only use it to send good vibes (and maybe a confirmation or two).",
+  },
+  {
+    name: "phone",
+    label: "Can we have your digits?",
+    description: "Your phone number, silly! So we can text you memes (just kidding... maybe).",
+  },
+  {
+    name: "country",
+    label: "Where in the world are you?",
+    description: "Let us know your country – purely for timezone respect and curiosity 🌍",
+  },
+  {
+    name: "pan",
+    label: "What's your PAN Number?",
+    description: "Okay, serious business here. Government wants to know you're legit 🧐",
+  },
+  {
+    name: "aadhar",
+    label: "And your Aadhar Number, please?",
+    description: "Last bit of official stuff — we promise! 🔐",
+  },
 ];
 
 export default function QuestionPage() {
   const { step } = useParams();
-  const index = parseInt(step);
+  const index = parseInt(step, 10);
   const navigate = useNavigate();
 
   const { answers, updateAnswer } = useForm();
   const question = questions[index];
 
-  const [input, setInput] = useState(answers[question.name] || "");
+  const validators = {
+    name: validateName,
+    email: validateEmail,
+    phone: validatePhone,
+    country: validateCountry,
+    pan: validatePAN,
+    aadhar: validateAadhar,
+  };
+
+  const [input, setInput] = useState("");
   const [error, setError] = useState("");
 
-  function HandleNext(){
-    if(!input.trim()){
-        return setError('The Field is Required');
+  useEffect(() => {
+    setInput(answers[question.name] || "");
+    setError("");
+  }, [question.name]);
+
+  const handleNext = () => {
+    if (!input.trim()) {
+      return setError("This field is required. Don’t ghost us 👻");
     }
 
-    updateAnswer(question.name,input);
-    if(index+1 < questions.length){
-        navigate(`/question/${index+1}`);
-    }else{
-        navigate('/summary')
+    const validate = validators[question.name];
+    if (validate) {
+      const { valid, error: validationError } = validate(input);
+      if (!valid) return setError(validationError);
     }
-  }
+
+    updateAnswer(question.name, input);
+    const nextIndex = index + 1;
+    navigate(nextIndex < questions.length ? `/question/${nextIndex}` : "/summary");
+  };
 
   return (
-    <div>
-      <h1>{question.label}</h1>
+    <div className="question-container">
+      <h1 className="question-label">{question.label}</h1>
+      <p className="question-description">{question.description}</p>
       <input
         type="text"
         value={input}
@@ -45,9 +101,14 @@ export default function QuestionPage() {
           setInput(e.target.value);
           setError("");
         }}
+        className={`question-input ${error ? "input-error" : ""}`}
+        placeholder="Type your answer here..."
       />
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={HandleNext} >OK</button>
+      {error && <p className="error-text">{error}</p>}
+      <button onClick={handleNext} className="question-button">
+        OK
+      </button>
+      <p className="question-hint">press <strong>Enter ↵</strong> to continue</p>
     </div>
   );
 }
