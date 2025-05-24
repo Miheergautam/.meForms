@@ -17,16 +17,56 @@ import {
 } from "../utils/validation";
 
 const questions = [
-  { name: "firstName", label: "What's your first name?", description: "We need to know what to call you 👋" },
-  { name: "lastName", label: "And your last name?", description: "Just for formality (or to shout your full name)" },
-  { name: "username", label: "Choose a cool username!", description: "Something unique and memorable 💡" },
-  { name: "email", label: "Your email address?", description: "We'll only use it to send good vibes and confirmations." },
-  { name: "password", label: "Create a strong password", description: "Keep it secret, keep it safe 🔐" },
-  { name: "phone", label: "Your phone number?", description: "Include country code e.g., +91 9876543210 📱" },
-  { name: "country", label: "Which country do you live in?", description: "So we know your timezone 🌍" },
-  { name: "city", label: "Your city?", description: "We love knowing where our users come from 🏙️" },
-  { name: "pan", label: "Your PAN number?", description: "Govt. compliance things 🧾" },
-  { name: "aadhar", label: "Your Aadhar number?", description: "Final stretch of ID collection ✅" },
+  {
+    name: "firstName",
+    label: "What's your first name?",
+    description: "We need to know what to call you (besides 'Hey you') 👋",
+  },
+  {
+    name: "lastName",
+    label: "And your last name?",
+    description: "For formal stuff. Or when we need to sound serious 😤",
+  },
+  {
+    name: "username",
+    label: "Choose a cool username!",
+    description: "Make it legendary. Or at least not taken. 💡",
+  },
+  {
+    name: "email",
+    label: "Your email address?",
+    description: "No spam. No scams. Just mildly important stuff. 📬",
+  },
+  {
+    name: "password",
+    label: "Create a strong password",
+    description: "Add a dragon emoji or something. Just don't use '123456'. 🔐",
+  },
+  {
+    name: "phone",
+    label: "Your phone number?",
+    description: "In case we need to call you... or your mom. 📱",
+  },
+  {
+    name: "country",
+    label: "Which country do you live in?",
+    description: "We’re just trying to set the timezone. Not stalk you. 🌍",
+  },
+  {
+    name: "city",
+    label: "Your city?",
+    description: "Because ‘middle of nowhere’ isn’t specific enough 🏙️",
+  },
+  {
+    name: "pan",
+    label: "Your PAN number?",
+    description: "Required by the tax overlords 🧾",
+  },
+  {
+    name: "aadhar",
+    label: "Your Aadhar number?",
+    description: "The final boss of ID verification ✅",
+  },
 ];
 
 export default function QuestionPage() {
