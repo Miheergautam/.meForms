@@ -90,29 +90,51 @@ export default function QuestionPage() {
   };
 
   const [input, setInput] = useState("");
+  const [countryCode, setCountryCode] = useState("+91");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // Calculate progress % for progress bar
   const progressPercent = Math.round(((index + 1) / questions.length) * 100);
 
   useEffect(() => {
-    setInput(answers[question.name] || "");
+    if (question.name === "phone") {
+      const value = answers["phone"] || "";
+      const match = value.match(/^(\+\d+)?(\d{5,})$/);
+      setCountryCode(match?.[1] || "+91");
+      setInput(match?.[2] || "");
+    } else {
+      setInput(answers[question.name] || "");
+    }
     setError("");
-  }, [question.name, answers, question.name]);
+  }, [question.name, answers]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter" && document.activeElement.tagName !== "SELECT") {
+        handleNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [input, countryCode]);
 
   const handleNext = () => {
+    const finalInput = question.name === "phone" ? `${countryCode}${input}` : input;
+
     if (!input.trim()) {
       return setError("This field is required. Don’t ghost us 👻");
     }
 
     const validate = validators[question.name];
     if (validate) {
-      const { valid, error: validationError } = validate(input);
+      const { valid, error: validationError } = validate(finalInput);
       if (!valid) return setError(validationError);
     }
 
-    updateAnswer(question.name, input);
+    updateAnswer(question.name, finalInput);
     const nextIndex = index + 1;
     navigate(nextIndex < questions.length ? `/question/${nextIndex}` : "/summary");
   };
@@ -176,6 +198,33 @@ export default function QuestionPage() {
       );
     }
 
+    if (question.name === "phone") {
+      return (
+        <div className="phone-input-wrapper">
+          <select
+            value={countryCode}
+            onChange={(e) => setCountryCode(e.target.value)}
+            className="phone-country-code"
+          >
+            <option value="+91">+91 (India)</option>
+            <option value="+1">+1 (USA)</option>
+            <option value="+44">+44 (UK)</option>
+            <option value="+49">+49 (Germany)</option>
+          </select>
+          <input
+            type="tel"
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+              setError("");
+            }}
+            className={`phone-number-input ${error ? "input-error" : ""}`}
+            placeholder="Enter your phone number"
+          />
+        </div>
+      );
+    }
+
     return (
       <input
         type="text"
@@ -192,7 +241,6 @@ export default function QuestionPage() {
 
   return (
     <div className="question-container">
-      {/* Progress bar */}
       <div className="progress-container">
         <div className="progress-bar" style={{ width: `${progressPercent}%` }} />
         <p className="progress-text">{`Step ${index + 1} of ${questions.length}`}</p>

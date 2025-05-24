@@ -78,6 +78,47 @@
   text-decoration: underline;
 }
 
+/* Phone input layout */
+.phone-input-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.phone-country-code {
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  min-width: 120px;
+  appearance: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.phone-country-code:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  outline: none;
+}
+
+.phone-number-input {
+  flex: 1;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.phone-number-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+  outline: none;
+}
+
 .question-button {
   padding: 0.9rem 2rem;
   font-size: 1.1rem;

@@ -1,4 +1,4 @@
-// Name: Allow letters and spaces, min 2 chars
+// Name: Allow letters and spaces, min 2 chars, max 50
 export const validateName = (value) => {
   const valid = /^[a-zA-Z\s]{2,50}$/.test(value.trim());
   return {
@@ -7,7 +7,7 @@ export const validateName = (value) => {
   };
 };
 
-// Email
+// Email: Basic structure check
 export const validateEmail = (value) => {
   const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
   return {
@@ -16,17 +16,17 @@ export const validateEmail = (value) => {
   };
 };
 
-// Phone: Indian format with country code optional
+// Phone: International support with optional +, allows spaces/dashes, 10–15 digits total
 export const validatePhone = (value) => {
   const trimmed = value.trim();
-  const valid = /^(\+?\d{1,4}[-\s]?)?[6-9]\d{9}$/.test(trimmed);
+  const valid = /^(\+?\d{1,4}[-\s]?)?([6-9]\d{9}|\d{10,14})$/.test(trimmed);
   return {
     valid,
     error: valid ? "" : "That phone number seems off — are you pranking us? 📱",
   };
 };
 
-// Country
+// Country: Letters and spaces, 2–50 characters
 export const validateCountry = (value) => {
   const valid = /^[a-zA-Z\s]{2,50}$/.test(value.trim());
   return {
@@ -35,7 +35,7 @@ export const validateCountry = (value) => {
   };
 };
 
-// PAN Number: Standard format
+// PAN Number: Standard Indian PAN format (ABCDE1234F)
 export const validatePAN = (value) => {
   const valid = /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(value.trim().toUpperCase());
   return {
@@ -44,7 +44,7 @@ export const validatePAN = (value) => {
   };
 };
 
-// Aadhar Number: 12-digit numeric
+// Aadhar Number: Exactly 12 digits
 export const validateAadhar = (value) => {
   const valid = /^\d{12}$/.test(value.trim());
   return {
@@ -53,7 +53,7 @@ export const validateAadhar = (value) => {
   };
 };
 
-// Username: alphanumeric, 3–20 chars
+// Username: Alphanumeric and underscores, 3–20 characters
 export const validateUsername = (value) => {
   const valid = /^[a-zA-Z0-9_]{3,20}$/.test(value.trim());
   return {
@@ -62,7 +62,7 @@ export const validateUsername = (value) => {
   };
 };
 
-// Password: min 6 characters, at least 1 number and 1 letter
+// Password: Minimum 6 chars, at least one letter and one number, symbols allowed
 export const validatePassword = (value) => {
   const valid = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/.test(value.trim());
   return {
@@ -71,7 +71,7 @@ export const validatePassword = (value) => {
   };
 };
 
-// City: basic check, letters and spaces only
+// City: Letters and spaces only, 2–50 characters
 export const validateCity = (value) => {
   const valid = /^[a-zA-Z\s]{2,50}$/.test(value.trim());
   return {
