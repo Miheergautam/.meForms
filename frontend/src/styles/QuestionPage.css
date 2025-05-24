@@ -21,6 +21,7 @@
   line-height: 1.6;
 }
 
+/* Shared input styles for text and select */
 .question-input {
   width: 100%;
   padding: 1rem;
@@ -29,22 +30,52 @@
   border-radius: 10px;
   box-sizing: border-box;
   margin-bottom: 1rem;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #fff;
+  appearance: none;
 }
 
 .question-input:focus {
   border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
   outline: none;
 }
 
 .input-error {
   border-color: #dc3545 !important;
+  background-color: #fff0f0;
 }
 
 .error-text {
   color: #dc3545;
   margin-bottom: 1rem;
   font-size: 0.95rem;
+}
+
+/* Password field layout */
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-field input {
+  flex: 1;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.toggle-password:hover {
+  text-decoration: underline;
 }
 
 .question-button {
@@ -66,4 +97,25 @@
   margin-top: 1rem;
   font-size: 0.9rem;
   color: #888;
+}
+
+.progress-container {
+  width: 100%;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.progress-bar {
+  height: 8px;
+  background: linear-gradient(to right, #007bff, #339af0);
+  box-shadow: 0 1px 4px rgba(0, 123, 255, 0.4);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.5rem;
+  text-align: right;
 }
